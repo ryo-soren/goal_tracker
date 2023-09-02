@@ -3,9 +3,10 @@ class CreateGoals < ActiveRecord::Migration[7.0]
     create_table :goals do |t|
       t.string :title
       t.text :description
-      t.string :kind
       t.string :frequency
       t.integer :times
+      t.integer :successful, default: 0
+      t.integer :unsuccessful, default: 0
       t.text :deadline
       t.references :user, null: false, foreign_key: true
 

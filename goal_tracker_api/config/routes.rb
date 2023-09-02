@@ -1,12 +1,15 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Defines the root path route ("/")
-  # root "articles#index"
-  
-  resource :session, only: [:new, :create, :destroy]
+  namespace :api, defaults: {format: :json} do
+    namespace :v1 do
 
-  resources :users, only: [:new, :create, :show, :update, :destroy]
-
+      resources :goals, only: [:index, :show, :create, :update, :destroy]
+      resources :users, only: [:show, :create, :update, :destroy]
+      resource :sessions, only: [:create, :destroy]
+      get '/current_user', to: "sessions#current"
+      
+    end
+    match "*unmatched_route", to:"application#not_found", via: :all
+  end
 
 end
