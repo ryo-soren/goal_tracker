@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { Session, User } from "../requests"
 import UserForm from './UserForm';
 
-const EditUserPage = () => {
-
+const EditUserPage = props => {
+    const {getCurrentUser} = props
     const [userID, setUserID] = useState('')
     const [firstname, setFirstname] = useState('')
     const [lastname, setLastname] = useState('')
@@ -35,11 +35,11 @@ const EditUserPage = () => {
 
 
     const updateUser = params => {
-        console.log(params);
         User.update(userID, params).then(user => {
             if (user.errors) {
                 console.log(user.errors);
             } else {
+                getCurrentUser()
                 navigate('/')
             }
         })

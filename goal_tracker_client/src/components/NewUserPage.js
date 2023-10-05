@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { User } from "../requests"
 import UserForm from './UserForm';
 
-const NewUserPage = () => {
-
+const NewUserPage = props => {
+    const {getCurrentUser} = props
     const [firstname, setFirstname] = useState('')
     const [lastname, setLastname] = useState('')
     const [email, setEmail] = useState('')
@@ -15,11 +15,11 @@ const NewUserPage = () => {
     const navigate = useNavigate()
 
     const createUser = params => {
-        console.log(params);
         User.create(params).then(user => {
             if (user.errors) {
                 console.log(user.errors);
             } else {
+                getCurrentUser()
                 navigate('/')
             }
         })

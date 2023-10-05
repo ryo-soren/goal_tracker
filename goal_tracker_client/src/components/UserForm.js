@@ -27,7 +27,6 @@ const UserForm = props => {
             }  
         }
         submitForm(formData)
-
     }
 
     return (

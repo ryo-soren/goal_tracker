@@ -34,6 +34,7 @@ const GoalShowPage = () => {
         setGoal(goal)
         
         const doneUpdatedJson = {
+            completion: true,
             done: parseInt(goalData.done)
         }
 

@@ -7,7 +7,7 @@ class Ability
 
     return unless user.present?
     can [:create, :read, :update, :destroy], Goal, user_id: user.id
-    can [:create, :read, :update, :destroy], User, id: user.id
+    can [:read, :update, :destroy], User, id: user.id
 
   end
 end

@@ -49,8 +49,8 @@ const App = () => {
         <Route path="/goals/:id" element={<GoalShowPage />} />
         <Route path="/new_goal" element={<NewGoalPage />}/>
         <Route path="/edit_goal/:id" element={<EditGoalPage/>}/>
-        <Route path="/new_user" element={<NewUserPage />}/>
-        <Route path="/edit_user" element={<EditUserPage />}/>
+        <Route path="/new_user" element={<NewUserPage getCurrentUser={() => getCurrentUser()}/>}/>
+        <Route path="/edit_user" element={<EditUserPage getCurrentUser={() => getCurrentUser()}/>}/>
         <Route path="/sign_in" element={<SignInPage getCurrentUser={() => getCurrentUser()}/>}/>
       </Routes>
     </>
