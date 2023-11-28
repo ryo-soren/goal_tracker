@@ -7,10 +7,11 @@
 #   Character.create(name: "Luke", movie: movies.first)
 Goal.destroy_all
 User.destroy_all
+Completion.destroy_all
 
 PASSWORD = "123"
 
-3.times do
+1.times do
     first_name = Faker::Name.first_name
     last_name = Faker::Name.last_name
     User.create(
@@ -28,19 +29,32 @@ users = User.all
     # kind = ["one_time", "repeating"]
     frequency = ["daily", "weekly", "monthly"]
 
-    Goal.create(
+    g = Goal.create(
         user: users.sample,
         title: Faker::Lorem.sentence,
         description: Faker::Lorem.paragraph,
         frequency: frequency.sample,
-        times: rand(1..4),
-        # deadline: Faker::Date.between(from: Date.today, to: "2023-12-31")
-        deadline: Date.today
+        times: rand(1..10),
+        deadline: Faker::Date.between(from: Date.today + 1, to: "2023-12-31")
     )
+    if g.valid?
+        rand(1...g.times).times do
+            completion_date = Faker::Date.between(from: "2023-10-01", to: Date.today)
+            completion_time = Faker::Time.between(from: completion_date.beginning_of_day, to: completion_date.end_of_day)
+                
+            Completion.create(
+                goal: g,
+                user: g.user,
+                created_at: DateTime.new(completion_date.year, completion_date.month, completion_date.day, completion_time.hour, completion_time.min, completion_time.sec)
+            )
+        end
+    end
 end
 
 goals = Goal.all
+completions = Completion.all
 
 puts users.count
 puts goals.count
+puts completions.count
 

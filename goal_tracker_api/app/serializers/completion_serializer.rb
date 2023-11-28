@@ -2,5 +2,9 @@ class CompletionSerializer < ActiveModel::Serializer
   belongs_to :user
   belongs_to :goal
 
-  attributes :id, :user_id, :goal_id
+  attributes :id, :goal_id, :frequency, :created_at
+
+  def frequency
+    object.goal&.frequency
+  end
 end

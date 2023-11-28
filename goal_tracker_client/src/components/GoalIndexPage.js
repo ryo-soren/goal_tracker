@@ -1,6 +1,9 @@
 import {Goal} from "../requests.js"
 import { Link, useNavigate } from "react-router-dom";
 import {useState, useEffect} from "react";
+import "./styles/index.css";
+import Calendar from "./calendar/utils/Calendar.js";
+import SuccessRate from "./calendar/utils/SuccessRate.js";
 
 const GoalIndexPage = () => {
 
@@ -47,13 +50,11 @@ const GoalIndexPage = () => {
 
     return(
         <>
-            <h1>Goals</h1>
-            {goals.map((g, i) => {
+            {/* {goals.map((g, i) => {
                 return(
                     <>
                         <div key={g.id}>
-                            {/* <h4 key={g.id}>Title: {g.title}</h4> */}
-                            <h4><Link to={`/goals/${g.id}`}>Title: {g.title}</Link>{" "}</h4>
+                            <h4><Link to={`/goals/${g.id}`}>Title: {g.title}</Link></h4>
                             <div><p>Description: {g.description}</p></div>
                             <div><p>Created by: {g.created_by}</p></div>
                             <div><small>Deadline: {g.deadline}</small></div>
@@ -72,7 +73,34 @@ const GoalIndexPage = () => {
                         <hr key={`${i} hr`}/>
                     </>
                 )
-            })}
+            })} */}
+
+            <div className="grid grid-container h-full">
+                <div className="sidebar">
+                    <div className="tab tab-1 green">
+                        <span className="icon">🏠</span><span>Home</span>
+                    </div>
+                    <div className="tab tab-2">
+                        <span className="icon">✅</span><span>Goals</span>
+                    </div>
+                </div>
+
+                <div className="grid dashboard bg-gray-100">
+                    <div className="history-container">
+                        <Calendar
+                        goals = {goals}
+                        />
+                    </div>
+                    <div className="success-container">
+                        <SuccessRate/>
+                    </div>
+                </div>
+
+                <div className="upcoming bg-gray-100">
+                    Upcoming
+                </div>
+
+            </div>
         </>
     )
 }
