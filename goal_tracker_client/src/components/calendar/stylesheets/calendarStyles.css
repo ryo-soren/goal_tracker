@@ -27,7 +27,7 @@
 
 .goals-view{
     display: grid;
-    grid-template-rows: 1fr 10fr;
+    grid-template-rows: 2fr 10fr;
 }
 
 .one_time{

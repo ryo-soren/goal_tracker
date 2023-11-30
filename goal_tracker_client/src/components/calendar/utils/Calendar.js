@@ -14,10 +14,10 @@ const Calendar = (props) => {
     // const [selectedDate, setSelectedDate] = useState(currentDate)
 
     return(
-        <div className='calendar-container bg-white rounded-t overflow-hidden'>
+        <div className='calendar-container bg-white rounded-t border-t border-x border-[#B1B1B1] overflow-hidden'>
             <div className='calendar-view flex flex-col'>
                 {/* <div className='flex justify-between p-2 items-center text-stone-400'> */}
-                <div className='flex justify-between border-l border-t border-[#B1B1B1] rounded-t rounded-r-none p-2 items-center text-stone-400'>
+                <div className='flex justify-between p-2 items-center text-stone-400 border-r border-[#B1B1B1]'>
                     {/* month & year */}
                     <div>
                         <span className='font-bold text-black'>
@@ -81,8 +81,7 @@ const Calendar = (props) => {
                                 // changes text colour for dates outside of the selected month  
                                 currentMonth ? "" : "text-stone-300",
                                 // removes right side border for tiles on the end of the container
-                                // ((index+1) % 7 === 0 && index !== 0 ) ? "" : "border-r", 
-                                "flex flex-col border-t border-l border-[#B1B1B1]" 
+                                "flex flex-col border-t border-r border-[#B1B1B1]" 
                             )}
                             onClick={() => {
                                 setSelected(date)
@@ -129,7 +128,7 @@ const Calendar = (props) => {
             </div>
             <div className='goals-view'>
                 {/* selected date */}
-                <h1 className='bg-[#4CAF4F] text-white text-s rounded-t rounded-l-none border-[#B1B1B1] border-t border-x flex place-content-center items-center'>
+                <h1 className='bg-[#4CAF4F] text-white text-s flex place-content-center items-center'>
                     {selected.date()+"/"+selected.month(selected.month() + 1).month()+"/"+selected.year()}
                 </h1>
 
@@ -142,7 +141,7 @@ const Calendar = (props) => {
                             const goalsByType = findGoals(filteredByType, goals)
                             return(
                                 // row of completion type
-                                <div key={i} className='border-t border-x border-[#B1B1B1] flex shrink-0 divide-x divide-[#b1b1b1]'>
+                                <div key={i} className='flex shrink-0 divide-x border-t border-[#B1B1B1] divide-[#b1b1b1]'>
                                     {/* left side */}
                                     <div className='w-1/3 flex flex-col items-center'>
                                         <h1 className={cn(`${type}-text`, "w-max h-min text-[8px] font-semibold border rounded-lg px-2 mt-2")}>
