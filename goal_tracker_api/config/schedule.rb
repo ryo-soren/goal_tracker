@@ -21,6 +21,6 @@
 set :environment, "development"
 set :output, "log/cron.log"
 
-every 1.day, at: "7:13 pm" do
+every 1.day, at: "4:48 pm" do
     runner "Goal.check_and_update_unsuccessful" 
 end

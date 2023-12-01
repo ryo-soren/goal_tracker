@@ -3,6 +3,7 @@ class Api::V1::GoalsController < Api::ApplicationController
     load_and_authorize_resource
 
     def index
+        # Goal.check_and_update_unsuccessful
         render(
             json: @goals,
             each_serializer: GoalSerializer

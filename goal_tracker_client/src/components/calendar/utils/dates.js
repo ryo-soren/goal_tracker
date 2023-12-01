@@ -105,10 +105,9 @@ export const months = [
 ];
 
 export const types = [
-    "one_time",
-    "daily",
-    "weekly",
-    "monthly",
-    "yearly"
-]
-
+    {type: "one_time", color: "E0783D"},
+    {type: "daily", color: "53A5D3"},
+    {type: "weekly", color: "FFC83A"},
+    {type: "monthly", color: "FF0000"},
+    {type: "yearly", color: "7453D3"}
+];

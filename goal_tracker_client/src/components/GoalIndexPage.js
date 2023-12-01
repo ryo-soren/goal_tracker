@@ -67,7 +67,7 @@ const GoalIndexPage = () => {
                                 g.done >= g.times ? 
                             <div>Success</div>                                
                                 :
-                            <button  onClick={()=> markDone(g, i)}>Mark Done</button>
+                            <button className="border border-black" onClick={()=> markDone(g, i)}>Mark Done</button>
                             }
                         </div>
                         <hr key={`${i} hr`}/>
@@ -92,7 +92,9 @@ const GoalIndexPage = () => {
                         />
                     </div>
                     <div className="success-container">
-                        <SuccessRate/>
+                        <SuccessRate
+                        goals = {goals}
+                        />
                     </div>
                 </div>
 

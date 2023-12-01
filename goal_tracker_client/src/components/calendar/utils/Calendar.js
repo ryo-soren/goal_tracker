@@ -135,7 +135,8 @@ const Calendar = (props) => {
                 {/* Container for rows of completion type */}
                 <div className='grid grid-rows-5'>
                     {//greating a grid element for each type of frequency
-                        types.map((type, i) => {
+                        types.map((t, i) => {
+                            const {type, color} = t
                             const underscoreRemoved = type.replace("_", " ").replace(/(^\w|\s\w)(\S*)/g, match => match.toUpperCase())
                             const filteredByType = filterCompletionsByType(filterCompletionsByDate(completions, selected), type)
                             const goalsByType = findGoals(filteredByType, goals)
@@ -144,7 +145,7 @@ const Calendar = (props) => {
                                 <div key={i} className='flex shrink-0 divide-x border-t border-[#B1B1B1] divide-[#b1b1b1]'>
                                     {/* left side */}
                                     <div className='w-1/3 flex flex-col items-center'>
-                                        <h1 className={cn(`${type}-text`, "w-max h-min text-[8px] font-semibold border rounded-lg px-2 mt-2")}>
+                                        <h1 className={cn(`${type}-text`, `w-max h-min text-[8px] font-semibold border rounded-lg px-2 mt-2`)}>
                                             {underscoreRemoved}
                                         </h1>
                                         <div className='flex flex-col h-full text-[.6rem] text-black place-content-center items-center mx-auto font-semibold'>

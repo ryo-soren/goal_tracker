@@ -10,7 +10,7 @@ class Goal < ApplicationRecord
 
     def self.check_and_update_unsuccessful
         goals = Goal.all
-        goals.each do |g|            
+        goals.each do |g|
             if g.deadline.present? && g.deadline <= Date.today.to_s 
                 if g.times > g.done
                     g.unsuccessful = g.unsuccessful + 1
@@ -20,11 +20,11 @@ class Goal < ApplicationRecord
                     puts "*******"
                     case frequency
                     when "daily"
-                        g.deadline = Date.today + 1
+                        # g.deadline = Date.today + 1
                     when "weekly"
-                        g.deadline = Date.today + 7
+                        # g.deadline = Date.today + 7
                     when "monthly"
-                        g.deadline = Date.today.beginning_of_month.next_month
+                        # g.deadline = Date.today.beginning_of_month.next_month
                     end
                 end
                 g.done = 0

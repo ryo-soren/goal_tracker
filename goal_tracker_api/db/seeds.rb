@@ -25,7 +25,7 @@ end
 
 users = User.all
 
-10.times do
+20.times do
     # kind = ["one_time", "repeating"]
     frequency = ["daily", "weekly", "monthly"]
 
@@ -34,9 +34,12 @@ users = User.all
         title: Faker::Lorem.sentence,
         description: Faker::Lorem.paragraph,
         frequency: frequency.sample,
-        times: rand(1..10),
-        deadline: Faker::Date.between(from: Date.today + 1, to: "2023-12-31")
+        times: rand(2..10),
+        deadline: Date.today,
+        successful: rand(1..10),
+        unsuccessful: rand(0..10)
     )
+
     if g.valid?
         rand(1...g.times).times do
             completion_date = Faker::Date.between(from: "2023-10-01", to: Date.today)
