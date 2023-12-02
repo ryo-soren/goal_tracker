@@ -1,6 +1,6 @@
 import '../stylesheets/calendarStyles.css'
 import cn from "./cn";
-import { getCompletions, filterCompletionsByDate, filterCompletionsByType, findGoals, isSelected, dates, days, months, types } from "./dates";
+import { getCompletions, filterCompletionsByDate, filterCompletionsByType, findGoalsByCompletions, isSelected, dates, days, months, types } from "./dates";
 import { useState } from "react";
 import dayjs from "dayjs";
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
@@ -11,7 +11,6 @@ const Calendar = (props) => {
     const [selected, setSelected] = useState(currentDate)
     const {goals} = props
     const completions = getCompletions(goals)
-    // const [selectedDate, setSelectedDate] = useState(currentDate)
 
     return(
         <div className='calendar-container bg-white rounded-t border-t border-x border-[#B1B1B1] overflow-hidden'>
@@ -38,7 +37,6 @@ const Calendar = (props) => {
                             className='flex flex-col place-content-center text-xs bg-[#4CAF4F] p-1 rounded-full text-white'
                             onClick={() => {
                                 setSelected(currentDate)
-                                console.log(filterCompletionsByDate(completions, selected));
                             }}
                             >
                             <h1 className='text-s'>
@@ -80,7 +78,6 @@ const Calendar = (props) => {
                             className={cn(
                                 // changes text colour for dates outside of the selected month  
                                 currentMonth ? "" : "text-stone-300",
-                                // removes right side border for tiles on the end of the container
                                 "flex flex-col border-t border-r border-[#B1B1B1]" 
                             )}
                             onClick={() => {
@@ -129,20 +126,20 @@ const Calendar = (props) => {
             <div className='goals-view'>
                 {/* selected date */}
                 <h1 className='bg-[#4CAF4F] text-white text-s flex place-content-center items-center'>
-                    {selected.date()+"/"+selected.month(selected.month() + 1).month()+"/"+selected.year()}
+                    {selected.date()+"/"+(selected.month() + 1)+"/"+selected.year()}
                 </h1>
 
                 {/* Container for rows of completion type */}
                 <div className='grid grid-rows-5'>
                     {//greating a grid element for each type of frequency
                         types.map((t, i) => {
-                            const {type, color} = t
+                            const {type} = t
                             const underscoreRemoved = type.replace("_", " ").replace(/(^\w|\s\w)(\S*)/g, match => match.toUpperCase())
                             const filteredByType = filterCompletionsByType(filterCompletionsByDate(completions, selected), type)
-                            const goalsByType = findGoals(filteredByType, goals)
+                            const goalsByType = findGoalsByCompletions(filteredByType, goals)
                             return(
                                 // row of completion type
-                                <div key={i} className='flex shrink-0 divide-x border-t border-[#B1B1B1] divide-[#b1b1b1]'>
+                                <div key={i} className='flex divide-x border-t border-[#B1B1B1] divide-[#b1b1b1]'>
                                     {/* left side */}
                                     <div className='w-1/3 flex flex-col items-center'>
                                         <h1 className={cn(`${type}-text`, `w-max h-min text-[8px] font-semibold border rounded-lg px-2 mt-2`)}>

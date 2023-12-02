@@ -2,12 +2,17 @@ import {Goal} from "../requests.js"
 import { Link, useNavigate } from "react-router-dom";
 import {useState, useEffect} from "react";
 import "./styles/index.css";
-import Calendar from "./calendar/utils/Calendar.js";
-import SuccessRate from "./calendar/utils/SuccessRate.js";
+import Calendar from "./dashboard/utils/Calendar.js";
+import SuccessRate from "./dashboard/utils/SuccessRate.js";
+import Upcoming from "./dashboard/utils/Upcoming.js";
+import dayjs from "dayjs";
 
 const GoalIndexPage = () => {
 
     const [goals, setGoals] = useState([])
+    const currentDate = dayjs()
+    const [selected, setSelected] = useState(currentDate)
+
 
     useEffect(() => {
         getGoals()
@@ -15,7 +20,7 @@ const GoalIndexPage = () => {
 
     function getGoals(){
         Goal.index().then((goalsData) => {
-            console.log(goalsData)
+            console.log(goalsData);
             setGoals(goalsData)
         })
     }
@@ -98,8 +103,11 @@ const GoalIndexPage = () => {
                     </div>
                 </div>
 
-                <div className="upcoming bg-gray-100">
-                    Upcoming
+                <div className="flex flex-col h-full bg-gray-100 text-center text-[1.5rem] font-bold place-content-center">
+                    <h1 className=" py-[1rem]">Upcoming</h1>
+                    <Upcoming
+                    goals = {goals}
+                    />
                 </div>
 
             </div>

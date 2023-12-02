@@ -10,8 +10,8 @@ import GoalIndexPage from './components/GoalIndexPage';
 import SignInPage from './components/SignInPage';
 // import NewUserPage from './components/NewUserPage';
 // import EditUserPage from './components/EditUserPage';
-import Calendar from './components/calendar/utils/Calendar';
-import SuccessRate from './components/calendar/utils/SuccessRate';
+// import Calendar from './components/dashboard/utils/Calendar';
+// import SuccessRate from './components/dashboard/utils/SuccessRate';
 
 const App = () => {
 

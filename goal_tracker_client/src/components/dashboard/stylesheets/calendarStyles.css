@@ -15,7 +15,7 @@
     grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); /* Alternatively, you can use specific widths like 200px 100px; */
     width: 95%;
     height: 100%;
-    margin: auto;
+    margin: 0rem auto;
     margin-top: 1rem;
 }
 
@@ -27,11 +27,11 @@
 
 .goals-view{
     display: grid;
-    grid-template-rows: 2fr 10fr;
+    grid-template-rows: 1fr 8fr;
 }
 
 .one_time{
-    background-color: #E0783D;
+    background-color: #ff5e00;
 }
 
 .daily{
@@ -51,8 +51,8 @@
 }
 
 .one_time-text{
-    color: #E0783D;
-    border-color: #E0783D;
+    color: #ff5e00;
+    border-color: #ff5e00;
 }
 
 .daily-text{

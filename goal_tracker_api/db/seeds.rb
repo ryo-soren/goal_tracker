@@ -28,14 +28,15 @@ users = User.all
 20.times do
     # kind = ["one_time", "repeating"]
     frequency = ["daily", "weekly", "monthly"]
-
+    deadline = Faker::Date.between(from: Date.today, to: "2023-12-31")
+    time = Faker::Time.between(from: deadline.beginning_of_day, to: deadline.end_of_day)
     g = Goal.create(
         user: users.sample,
         title: Faker::Lorem.sentence,
         description: Faker::Lorem.paragraph,
         frequency: frequency.sample,
         times: rand(2..10),
-        deadline: Date.today,
+        deadline: DateTime.new(deadline.year, deadline.month, deadline.day, time.hour, time.min, time.sec) ,
         successful: rand(1..10),
         unsuccessful: rand(0..10)
     )

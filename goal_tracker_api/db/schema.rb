@@ -30,7 +30,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_02_002527) do
     t.integer "times"
     t.integer "successful", default: 0
     t.integer "unsuccessful", default: 0
-    t.text "deadline"
+    t.datetime "deadline"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

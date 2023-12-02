@@ -7,7 +7,7 @@ class CreateGoals < ActiveRecord::Migration[7.0]
       t.integer :times
       t.integer :successful, default: 0
       t.integer :unsuccessful, default: 0
-      t.text :deadline
+      t.datetime :deadline
       t.references :user, null: false, foreign_key: true
 
       t.timestamps

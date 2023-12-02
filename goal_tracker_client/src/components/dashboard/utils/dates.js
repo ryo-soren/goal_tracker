@@ -1,5 +1,34 @@
 import dayjs from "dayjs";
 
+export const datesOfWeek = (startDate = dayjs()) => {
+    const endDate = startDate.date(startDate.date() + 6)
+    const datesArray = []
+
+    for (let i = startDate.date(); i <= endDate.date(); i++) {
+        datesArray.push(startDate.date(i))
+    }
+    return datesArray
+}
+
+const matchDeadline = (goal, date) => {
+    const dateObjectWithTime = new Date(goal.deadline)
+    const year = dateObjectWithTime.getFullYear();
+    const month = dateObjectWithTime.getMonth();
+    const day = dateObjectWithTime.getDate();
+
+    const dateObjectWithTime2 = new Date(date.toDate())
+    const year2 = dateObjectWithTime2.getFullYear();
+    const month2 = dateObjectWithTime2.getMonth();
+    const day2 = dateObjectWithTime2.getDate();
+
+    return  new Date(year2, month2, day2).toString() === new Date(year, month, day).toString()
+}
+
+// fetch goals with upcoming due dates
+export const findGoalsByDate = (goals, date) => goals.filter(goal => matchDeadline(goal, date))
+
+
+// dates in calendar
 export const dates = (month = dayjs().month(), year = dayjs().year()) => {
     const startDate = dayjs().year(year).month(month).startOf('month')
     const endDate = dayjs().year(year).month(month).endOf('month')
@@ -45,15 +74,14 @@ export const getCompletions = (goalsList) =>{
     const completionsList = []
     goalsList.forEach(goal => {
         goal.completions.forEach(completion => {
-            completion.created_at = new Date(completion.created_at)
             completionsList.push(completion)
         });
     })
-    return completionsList.sort((a, b) => a.created_at - b.created_at)
+    return completionsList
 }
 
 // matches the date's format and checks if the date of the completion matches the tile's date
-const dateMatches = (completion, date) => {
+const matchCompletionDate = (completion, date) => {
     const dateObjectWithTime = new Date(completion.created_at)
     const year = dateObjectWithTime.getFullYear();
     const month = dateObjectWithTime.getMonth();
@@ -68,13 +96,13 @@ const dateMatches = (completion, date) => {
 }
 
 // filters the completions that match the given date
-export const filterCompletionsByDate = (completions, date) => completions.filter(completion => dateMatches(completion, date))
+export const filterCompletionsByDate = (completions, date) => completions.filter(completion => matchCompletionDate(completion, date))
 
 // filters the completions that match the frequency
 export const filterCompletionsByType = (comletions, type) => comletions.filter(completion => completion.frequency === type)
 
 // finds the goals that correspond to the given completion
-export const findGoals = (completions, goals) =>goals.filter(goal => completions.map(completion => completion.goal_id).includes(goal.id))
+export const findGoalsByCompletions = (completions, goals) => goals.filter(goal => completions.map(completion => completion.goal_id).includes(goal.id))
 
 // checks the selected date matches the date in the array
 export const isSelected = (date, dateInArray) => date === dateInArray
@@ -105,7 +133,7 @@ export const months = [
 ];
 
 export const types = [
-    {type: "one_time", color: "E0783D"},
+    {type: "one_time", color: "ff5e00"},
     {type: "daily", color: "53A5D3"},
     {type: "weekly", color: "FFC83A"},
     {type: "monthly", color: "FF0000"},

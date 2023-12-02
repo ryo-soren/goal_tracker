@@ -6,6 +6,5 @@ export const getSuccessRateByType = (goals, type) => {
         successfulAndUnsuccessful += g.successful + g.unsuccessful
     })
     const percent =  (successful/successfulAndUnsuccessful * 100).toFixed(0)
-    console.log(percent);
     return percent === "NaN" ?  0 : percent
 }

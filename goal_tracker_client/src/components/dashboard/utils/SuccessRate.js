@@ -6,11 +6,10 @@ import { getSuccessRateByType } from "./percentage";
 
 const SuccessRate = (props) => {
     const {goals} = props
-    // const percentage = (7/13 * 100).toFixed(0)
     
     return(
         <div className="flex flex-col border border-[#B1B1B1] rounded-b w-[95%] h-[95%] mx-auto">
-            <h1 className="mt-2 font-bold">Completion Rate</h1>
+            <h1 className="mt-2 font-bold">Success Rate</h1>
             <div className="flex w-full h-full">
                 {//create containers for each type
                     types.map((t, i) => {
