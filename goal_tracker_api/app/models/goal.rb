@@ -12,12 +12,9 @@ class Goal < ApplicationRecord
         goals = Goal.all
         goals.each do |g|
             if g.deadline.present? && g.deadline <= Date.today.to_s 
-                if g.times > g.done
+                if g.times > g.done 
                     g.unsuccessful = g.unsuccessful + 1
                     frequency = g.frequency
-                    puts "*******"
-                    puts g.frequency
-                    puts "*******"
                     case frequency
                     when "daily"
                         # g.deadline = Date.today + 1

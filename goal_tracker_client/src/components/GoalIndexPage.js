@@ -1,19 +1,18 @@
 import {Goal} from "../requests.js"
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {useState, useEffect} from "react";
+import { IoAddCircle } from "react-icons/io5";
 import "./styles/index.css";
-import Calendar from "./dashboard/utils/Calendar.js";
-import SuccessRate from "./dashboard/utils/SuccessRate.js";
-import Upcoming from "./dashboard/utils/Upcoming.js";
-import dayjs from "dayjs";
+import NewGoalPage from "./NewGoalPage.js";
+import Overlay from "./Overlay.js";
+import Dashboard from "./Dashboard.js";
 
 const GoalIndexPage = () => {
 
     const [goals, setGoals] = useState([])
-    const currentDate = dayjs()
-    const [selected, setSelected] = useState(currentDate)
-
-
+    const [display, setDisplay] = useState(false)
+    // const [showDashboard, setShowDashboard] = useState(true)
+    // const [showGoals, setShowGoals] = useState(false)
     useEffect(() => {
         getGoals()
     }, [])
@@ -79,36 +78,41 @@ const GoalIndexPage = () => {
                     </>
                 )
             })} */}
+            {
+                display ? (
+                    <Overlay
+                    setDisplay = {(event) => setDisplay(event)}
+                    component = {
+                        <NewGoalPage 
+                        setDisplay = {(event) => setDisplay(event)}
+                        goals = {goals}
+                        />
+                    }
+                    />        
+                ) : (
+                    ""
+                )
+            }
+
+            <div className='flex flex-col items-center w-max fixed text-[#4CAF4F] bottom-20 left-14'>
+                <IoAddCircle 
+                className='w-[6rem] h-[6rem] hover:cursor-pointer hover:text-[#6ed872]'
+                onClick={() => setDisplay(true)}
+                />
+                <h1 className='font-bold'>New Goal</h1>
+            </div>
 
             <div className="grid grid-container h-full">
                 <div className="sidebar">
-                    <div className="tab tab-1 green">
+                    <div className="tab green hover:cursor-pointer">
                         <span className="icon">🏠</span><span>Home</span>
                     </div>
-                    <div className="tab tab-2">
+                    <div className="tab hover:cursor-pointer">
                         <span className="icon">✅</span><span>Goals</span>
                     </div>
                 </div>
 
-                <div className="grid dashboard bg-gray-100">
-                    <div className="history-container">
-                        <Calendar
-                        goals = {goals}
-                        />
-                    </div>
-                    <div className="success-container">
-                        <SuccessRate
-                        goals = {goals}
-                        />
-                    </div>
-                </div>
-
-                <div className="flex flex-col h-full bg-gray-100 text-center text-[1.5rem] font-bold place-content-center">
-                    <h1 className=" py-[1rem]">Upcoming</h1>
-                    <Upcoming
-                    goals = {goals}
-                    />
-                </div>
+                <Dashboard goals={goals}/>
 
             </div>
         </>

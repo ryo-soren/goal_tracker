@@ -23,6 +23,8 @@ const GoalShowPage = () => {
         })
     }
 
+    const getDeadline = (deadlineObject) => new Date(new Date(deadlineObject).getFullYear(), new Date(deadlineObject).getMonth(), new Date(deadlineObject).getDate()).toDateString()
+
     function markDone(goalData){
 
         goalData.done += 1
@@ -50,23 +52,25 @@ const GoalShowPage = () => {
 
     return(
         <>
-            <div key={goal.id}>
+            <div key={goal.id} className="flex flex-col items-center place-content-center w-[100vw]">
                 <h4>Title: {goal.title}</h4>
                 <div><p>Description: {goal.description}</p></div>
                 <div><p>Created by: {goal.created_by}</p></div>
-                <div><small>Deadline: {goal.deadline}</small></div>
+                <div><small>Deadline: {getDeadline(goal.deadline)}</small></div>
                 <div><small>Times: {goal.times}</small></div>
                 <div><small>Done: {goal.done}</small></div>
                 <div><small>Successful: {goal.successful}</small></div>
                 <div><small>Unsuccesful: {goal.unsuccessful}</small></div>
                 <div><small>ID: {goal.id}</small></div>
-                {
-                goal.done >= goal.times ? 
-                <div>Success</div>                                
-                    :
-                <button  onClick={()=> markDone(goal)}>Mark Done</button>
-                }
-                <button onClick={()=>navigate(`/edit_goal/${goal.id}`)}>Edit</button>
+                <div className="flex gap-5">
+                    {
+                    goal.done >= goal.times ? 
+                    <div>Success</div>                                
+                        :
+                    <button  onClick={()=> markDone(goal)}>Mark Done</button>
+                    }
+                    <button onClick={()=>navigate(`/edit_goal/${goal.id}`)}>Edit</button>
+                </div>
             </div>
             <hr key={`${goal.id+1} hr`}/>
         </>

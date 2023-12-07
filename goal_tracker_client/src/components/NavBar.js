@@ -1,4 +1,5 @@
 import { Session } from "../requests"
+import { Link } from "react-router-dom";
 import "./styles/navbar.css";
 
 const NavBar = props => {
@@ -24,12 +25,10 @@ const NavBar = props => {
                     <div className="vl"></div>
                         <h1 className="title">Goal Tracker</h1>
                 </div>
-
-                {/* <div className="vl no-margin"></div> */}
-
+                
                 <div className="right">
-                    <div className="title-container">
-                        <h2>Home</h2>
+                    <div className="title-container hover:cursor-pointer">
+                        <h2><Link to={`/`}>Home</Link></h2>
                         <div className="hl"></div>
                     </div>
                     <div className="profile-container">

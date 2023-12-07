@@ -26,7 +26,7 @@ const Calendar = (props) => {
                             {" "+selected.year()}
                         </span>
                     </div>
-                    
+                
                     {/* next/prev month & return to current date */}
                     <div className='flex gap-1 hover:cursor-pointer'>
 
@@ -39,7 +39,7 @@ const Calendar = (props) => {
                                 setSelected(currentDate)
                             }}
                             >
-                            <h1 className='text-s'>
+                            <h1 className='text-s select-none'>
                                 Today
                             </h1>
                             </div>
@@ -78,7 +78,7 @@ const Calendar = (props) => {
                             className={cn(
                                 // changes text colour for dates outside of the selected month  
                                 currentMonth ? "" : "text-stone-300",
-                                "flex flex-col border-t border-r border-[#B1B1B1]" 
+                                "flex flex-col border-t border-r border-[#B1B1B1] select-none" 
                             )}
                             onClick={() => {
                                 setSelected(date)
@@ -125,7 +125,7 @@ const Calendar = (props) => {
             </div>
             <div className='goals-view'>
                 {/* selected date */}
-                <h1 className='bg-[#4CAF4F] text-white text-s flex place-content-center items-center'>
+                <h1 className='bg-[#4CAF4F] text-white text-s flex place-content-center items-center select-none'>
                     {selected.date()+"/"+(selected.month() + 1)+"/"+selected.year()}
                 </h1>
 
@@ -134,7 +134,7 @@ const Calendar = (props) => {
                     {//greating a grid element for each type of frequency
                         types.map((t, i) => {
                             const {type} = t
-                            const underscoreRemoved = type.replace("_", " ").replace(/(^\w|\s\w)(\S*)/g, match => match.toUpperCase())
+                            const underscoreRemoved = (type.replace("_", " ")).replace(/(^\w|\s\w)(\S*)/g, match => match.toUpperCase())
                             const filteredByType = filterCompletionsByType(filterCompletionsByDate(completions, selected), type)
                             const goalsByType = findGoalsByCompletions(filteredByType, goals)
                             return(

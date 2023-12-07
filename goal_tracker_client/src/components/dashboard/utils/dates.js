@@ -4,9 +4,22 @@ export const datesOfWeek = (startDate = dayjs()) => {
     const endDate = startDate.date(startDate.date() + 6)
     const datesArray = []
 
-    for (let i = startDate.date(); i <= endDate.date(); i++) {
-        datesArray.push(startDate.date(i))
+    if (startDate.date() < endDate.date()) {
+        for (let i = startDate.date(); i <= endDate.date(); i++) {
+            datesArray.push(startDate.date(i))
+        }    
+    } else {
+        for (let i = startDate.date(); i <= startDate.endOf('month').date(); i++) {
+            datesArray.push(startDate.date(i))            
+        }
+        for (let i = 1; i <= endDate.date(); i++) {
+            datesArray.push(endDate.date(i))            
+            
+        }
     }
+    
+
+
     return datesArray
 }
 
@@ -20,7 +33,6 @@ const matchDeadline = (goal, date) => {
     const year2 = dateObjectWithTime2.getFullYear();
     const month2 = dateObjectWithTime2.getMonth();
     const day2 = dateObjectWithTime2.getDate();
-
     return  new Date(year2, month2, day2).toString() === new Date(year, month, day).toString()
 }
 
