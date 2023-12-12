@@ -6,13 +6,14 @@ import "./styles/index.css";
 import NewGoalPage from "./NewGoalPage.js";
 import Overlay from "./Overlay.js";
 import Dashboard from "./Dashboard.js";
+import cn from "./dashboard/utils/cn.js";
+import GoalIndexView from "./GoalIndexView.js";
 
 const GoalIndexPage = () => {
 
     const [goals, setGoals] = useState([])
     const [display, setDisplay] = useState(false)
-    // const [showDashboard, setShowDashboard] = useState(true)
-    // const [showGoals, setShowGoals] = useState(false)
+    const [showGoals, setShowGoals] = useState(false)
     useEffect(() => {
         getGoals()
     }, [])
@@ -104,15 +105,35 @@ const GoalIndexPage = () => {
 
             <div className="grid grid-container h-full">
                 <div className="sidebar">
-                    <div className="tab green hover:cursor-pointer">
+                    <div 
+                    className={cn("tab hover:cursor-pointer", showGoals ? "" : "green")}
+                    onClick={() => {
+                        setShowGoals(false)
+                    }}
+                    >
                         <span className="icon">🏠</span><span>Home</span>
                     </div>
-                    <div className="tab hover:cursor-pointer">
+                    <div
+                    className={cn("tab hover:cursor-pointer", showGoals ? "green" : "")}
+                    onClick={() => {
+                        setShowGoals(true)
+                    }}
+                    >
                         <span className="icon">✅</span><span>Goals</span>
                     </div>
                 </div>
-
-                <Dashboard goals={goals}/>
+                <div className="w-full h-full overflow-y-auto flex">
+                    {
+                        showGoals ? (
+                                <GoalIndexView
+                                goals = {goals}
+                                setGoals = {(event) => setGoals(event)}
+                                />
+                            ) : (
+                                <Dashboard goals={goals}/>
+                        )
+                    }
+                </div>
 
             </div>
         </>
