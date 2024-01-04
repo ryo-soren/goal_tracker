@@ -8,3 +8,5 @@ export const getSuccessRateByType = (goals, type) => {
     const percent =  (successful/successfulAndUnsuccessful * 100).toFixed(0)
     return percent === "NaN" ?  0 : percent
 }
+
+export const goalProgress = goal => ((goal.done / goal.times) * 100).toFixed(0) === "NaN" ? 0 : (goal.done / goal.times * 100).toFixed(0)

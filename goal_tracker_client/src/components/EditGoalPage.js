@@ -10,6 +10,7 @@ const EditGoalPage = () => {
     const [frequency, setFrequency] = useState()
     const [times, setTimes] = useState(1)
     const [deadline, setDeadline] = useState(new Date())
+    const [errors, setErrors] = useState([])
 
     const navigate = useNavigate()
 
@@ -27,16 +28,17 @@ const EditGoalPage = () => {
             setDescription(description)
             setFrequency(frequency)
             setTimes(times)
-            setDeadline(deadline)
+            setDeadline(new Date(deadline))
         })
     }
 
     const updateGoal = (formData) => {
         Goal.update(match.params.id, formData).then(goal => {
             if (goal.errors) {
+                setErrors([...goal.errors])
                 console.log(goal.errors);
             }else {
-                navigate(`/goals/${goal.id}`)
+                navigate(`/goals/${match.params.id}`)
             }
         })
     }
@@ -50,6 +52,7 @@ const EditGoalPage = () => {
                     frequency = {frequency}
                     times = {times}
                     deadline = {deadline}
+                    errors = {errors}
 
                     setTitle={(event)=>setTitle(event)}
                     setDescription={(event)=>setDescription(event)}

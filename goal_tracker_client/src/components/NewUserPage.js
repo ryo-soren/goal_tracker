@@ -8,15 +8,17 @@ const NewUserPage = props => {
     const [firstname, setFirstname] = useState('')
     const [lastname, setLastname] = useState('')
     const [email, setEmail] = useState('')
-    const [username, setUsername] = useState('')
+    const [username, setUsername] = useState()
     const [password, setPassword] = useState('')
     const [passwordConfirmation, setPasswordConfirmation] = useState('')
+    const [errors, setErrors] = useState([])
 
     const navigate = useNavigate()
 
     const createUser = params => {
         User.create(params).then(user => {
             if (user.errors) {
+                setErrors([...user.errors])
                 console.log(user.errors);
             } else {
                 getCurrentUser()
@@ -33,6 +35,7 @@ const NewUserPage = props => {
             username={username}
             password={password}
             passwordConfirmation={passwordConfirmation}
+            errors={errors}
             
             setFirstname={(event) => setFirstname(event)}
             setLastname={(event) => setLastname(event)}
@@ -40,6 +43,7 @@ const NewUserPage = props => {
             setUsername={(event) => setUsername(event)}
             setPassword={(event) => setPassword(event)}
             setPasswordConfirmation={(event) => setPasswordConfirmation(event)}
+            setErrors={(event) => setErrors(event)}
 
             submitForm={(params) => createUser(params)}
         />

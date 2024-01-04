@@ -119,6 +119,8 @@ export const findGoalsByCompletions = (completions, goals) => goals.filter(goal 
 // checks the selected date matches the date in the array
 export const isSelected = (date, dateInArray) => date === dateInArray
 
+export const findTypeByGoal = (goal) => types.filter(type => type.type === goal.frequency)[0]
+
 export const days = [
     "SUN",
     "MON", 

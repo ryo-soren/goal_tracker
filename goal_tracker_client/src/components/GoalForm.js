@@ -1,14 +1,14 @@
 import DatePicker from "react-datepicker";
 import { types } from "./dashboard/utils/dates";
 import cn, { capitalizeFirstLetter } from "./dashboard/utils/cn";
+import FormErrors from "./FormErrors";
 require('react-datepicker/dist/react-datepicker.css')
 
 const GoalForm = props => {
-
     const {
         title, description, frequency, times, deadline,
         setTitle, setDescription, setFrequency, setTimes, setDeadline,
-        submitForm
+        submitForm, errors
     } = props
 
     const getDataAndSubmit = (event) => {
@@ -26,7 +26,7 @@ const GoalForm = props => {
     }
 
     return(
-        <div className="h-[90%] text-slate-700 mx-auto bg-white flex flex-col place-content-center">
+        <div className="h-[90%] text-slate-700 mx-auto bg-white flex flex-col place-content-center p-12">
             <h1 className="text-[2rem]">New Goal</h1>
 
             <form onSubmit={getDataAndSubmit} className="h-max select-none">
@@ -37,6 +37,7 @@ const GoalForm = props => {
                     onChange={(event) => setTitle(event.currentTarget.value)}
                     required
                     />
+                    <FormErrors forField="title" errors={errors}/>
                 </div>
 
                 <div className="flex flex-col my-4">
@@ -47,6 +48,7 @@ const GoalForm = props => {
                     onChange={event=> setDescription(event.currentTarget.value)}
                     required
                     />
+                    <FormErrors forField="description" errors={errors}/>                    
                 </div>
 
                 <div className="flex flex-col my-4">
@@ -72,6 +74,7 @@ const GoalForm = props => {
                                 )
                             })
                         }
+                        <FormErrors forField="frequency" errors={errors}/>
                     </div>
                 </div>
 
@@ -84,7 +87,6 @@ const GoalForm = props => {
                             onChange={event=> setTimes(event.currentTarget.value)}
                             readOnly
                             />
-
                             {
                                 times === 1 ? (
                                     <div 
@@ -111,20 +113,21 @@ const GoalForm = props => {
                                 )
                             }
                         </div>
+                        <FormErrors forField="done" errrors={errors}/>
                     </div>
                     <div className="flex flex-col w-[45%]">
                         <label htmlFor="title">Deadline</label>
-                    <DatePicker selected={new Date(deadline)} value={deadline}
+                        <DatePicker selected={new Date(deadline)} value={deadline}
                         className="border border-[#4CAF4F] w-full"
                         minDate={new Date(new Date().getTime() + (24 * 60 * 60 * 1000))}
                         onChange={date => setDeadline(date)}/>
+                        <FormErrors forField="deadline" errors={errors}/>
                     </div>
                 </div>
 
                 <button className="bg-[#4CAF4F] text-white border-none rounded-full px-4 mt-8">Submit</button>
             </form>
         </div>
-
     )
 }
 
