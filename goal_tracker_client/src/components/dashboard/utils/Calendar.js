@@ -20,7 +20,7 @@ const Calendar = (props) => {
                     {/* month & year */}
                     <div>
                         <span className='font-bold text-black'>
-                            {months[selected.month()]+" "}
+                        {months[selected.month()]+" "}  
                         </span>
                         <span>
                             {" "+selected.year()}
@@ -38,7 +38,7 @@ const Calendar = (props) => {
                             onClick={() => {
                                 setSelected(currentDate)
                             }}
-                            >
+                            > 
                             <h1 className='text-s select-none'>
                                 Today
                             </h1>
@@ -131,7 +131,7 @@ const Calendar = (props) => {
 
                 {/* Container for rows of completion type */}
                 <div className='grid grid-rows-5'>
-                    {//greating a grid element for each type of frequency
+                    {//creating a grid element for each type of frequency
                         types.map((t, i) => {
                             const {type} = t
                             const underscoreRemoved = (type.replace("_", " ")).replace(/(^\w|\s\w)(\S*)/g, match => match.toUpperCase())
@@ -139,32 +139,32 @@ const Calendar = (props) => {
                             const goalsByType = findGoalsByCompletions(filteredByType, goals)
                             return(
                                 // row of completion type
-                                <div key={i} className='flex divide-x border-t border-[#B1B1B1] divide-[#b1b1b1]'>
-                                    {/* left side */}
-                                    <div className='w-1/3 flex flex-col items-center'>
-                                        <h1 className={cn(`${type}-text`, `w-max h-min text-[8px] font-semibold border rounded-lg px-2 mt-2`)}>
-                                            {underscoreRemoved}
-                                        </h1>
-                                        <div className='flex flex-col h-full text-[.6rem] text-black place-content-center items-center mx-auto font-semibold'>
-                                            <h1>
-                                                {goalsByType.length + (goalsByType.length === 1 ? " goal" : " goals")}
+                                <div key={i} className='flex border-t border-[#B1B1B1]'>
+                                        {/* left side */}
+                                        <div className='w-1/3 flex flex-col items-center border-r border-[#b1b1b1]'>
+                                            <h1 className={cn(`${type}-text`, `w-max h-min text-[8px] font-semibold border rounded-lg px-2 mt-2`)}>
+                                                {underscoreRemoved}
                                             </h1>
-                                            <h1> Completed</h1>
+                                            <div className='flex flex-col h-full text-[.6rem] text-black place-content-center items-center mx-auto font-semibold'>
+                                                <h1>
+                                                    {goalsByType.length + (goalsByType.length === 1 ? " goal" : " goals")}
+                                                </h1>
+                                                <h1> Completed</h1>
+                                            </div>
                                         </div>
-                                    </div>
-                                    {/* Goals */}
-                                    <div className='w-2/3 flex flex-col flex-wrap items-start'>
-                                        {goalsByType.map((g, i) => {
-                                            return(
-                                                <div 
-                                                key={i}
-                                                className='text-[10px] text-left font-light border-b whitespace-nowrap w-full mt-1 pl-1'
-                                                >
-                                                    {g.title}
-                                                </div>
-                                            )
-                                        })}
-                                    </div>
+                                        {/* Goals */}
+                                        <div className='w-2/3 max-h-20 overflow-y-auto flex flex-col'>
+                                            {goalsByType.map((g, i) => {
+                                                return(
+                                                    <div 
+                                                    key={i}
+                                                    className='text-[10px] text-left font-light border-b whitespace-nowrap w-full mt-1 pl-1'
+                                                    >
+                                                        {g.title}
+                                                    </div>
+                                                )
+                                            })}
+                                        </div>
                                 </div>
                             )
                         })

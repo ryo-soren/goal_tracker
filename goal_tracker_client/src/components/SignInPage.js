@@ -22,7 +22,7 @@ const SignInPage = props => {
             } else {
                 console.log(user);
                 getCurrentUser()
-                navigate(`/goals`)
+                navigate(`/`)
             }
         })
     }

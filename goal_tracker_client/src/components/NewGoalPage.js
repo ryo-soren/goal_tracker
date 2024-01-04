@@ -9,18 +9,18 @@ const NewGoalPage = (props) => {
     const [frequency, setFrequency] = useState()
     const [times, setTimes] = useState(1)
     const [deadline, setDeadline] = useState(new Date(new Date().getTime() + (24 * 60 * 60 * 1000)))
+    const [errors, setErrors] = useState()
 
     function createNewGoal(params) {
-
         Goal.create(params).then(goal => {
             if (goal.errors) {
+                setErrors([...goal.errors])
                 console.log(goal.errors);
             } else {
                 setDisplay(false)
                 window.location.reload();
             }
         })
-        
     }
 
     return(
@@ -31,6 +31,7 @@ const NewGoalPage = (props) => {
                 frequency = {frequency}
                 times = {times}
                 deadline = {deadline}
+                errors = {errors}
 
                 setTitle={(event)=>setTitle(event)}
                 setDescription={(event)=>setDescription(event)}

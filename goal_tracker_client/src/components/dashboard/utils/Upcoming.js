@@ -67,18 +67,20 @@ const Upcoming = props => {
                                 <div className={cn("flex flex-wrap w-4/5 border-[#b1b1b1] place-content-center items-center", i === 0 ? "": "border-t")}>
                                     {findGoalsByDate(goals, day).map(({title, frequency, done, times, id}, i) => {
                                         return(
-                                            <div key={i} 
-                                            className="hover:cursor-pointer flex flex-wrap text-[8px] mx-2 my-2"
-                                            >
-                                                <Link to={`/goals/${id}`}
-                                                className="flex flex-wrap"
+                                            (done/times*100).toFixed(0) < 100 ? (
+                                                <div key={i} 
+                                                className="hover:cursor-pointer flex flex-wrap text-[8px] mx-2 my-2"
                                                 >
-                                                    <div className={cn("rounded-full h-3 w-3 mr-2", `${frequency}`)}></div>
-                                                    <div className="overflow-hidden whitespace-nowrap max-w-[4rem]">{title}</div>
-                                                    <div className="mx-1">-</div>
-                                                    <div>{(done/times*100).toFixed(0)}% Done</div>
-                                                </Link>
-                                            </div>
+                                                    <Link to={`/goals/${id}`}
+                                                    className="flex flex-wrap"
+                                                    >
+                                                        <div className={cn("rounded-full h-3 w-3 mr-2", `${frequency}`)}></div>
+                                                        <div className="overflow-hidden whitespace-nowrap max-w-[4rem]">{title}</div>
+                                                        <div className="mx-1">-</div>
+                                                        <div>{(done/times*100).toFixed(0)}% Done</div>
+                                                    </Link>
+                                                </div>
+                                            ) : ("")
                                         )
                                     })}
                                 </div>                                
