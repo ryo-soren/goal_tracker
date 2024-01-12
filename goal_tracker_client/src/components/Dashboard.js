@@ -8,7 +8,7 @@ const Dashboard = (props) => {
 
     return(
         <div className="grid dashboard-container">
-            <div className="grid dashboard bg-gray-100">
+            <div className="grid dashboard">
                 <div className="history-container">
                     <Calendar
                     goals = {goals}
@@ -21,7 +21,7 @@ const Dashboard = (props) => {
                 </div>
             </div>
 
-            <div className="flex flex-col h-full bg-gray-100 text-center text-[1.5rem] font-bold place-content-center">
+            <div className="flex flex-col h-full text-center text-[1.5rem] font-bold place-content-center">
                 <h1 className=" py-[1rem]">Upcoming</h1>
                 <Upcoming
                 goals = {goals}

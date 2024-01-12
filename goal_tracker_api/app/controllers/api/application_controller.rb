@@ -72,19 +72,23 @@ class Api::ApplicationController < ApplicationController
     end
 
     def standard_error(error)
-        logger.error error.full_message
+        if error.is_a?(ActiveRecord::RecordInvalid)
+            record_invalid(error)
+        else
+            logger.error error.full_message
 
-        render(
-            status: 500, #alias :internal_server_error
-            json: {
-                errors: [
-                    {
-                        type: error.class.to_s,
-                        message: error.message
-                    }
-                ]
-            } 
-        )
+            render(
+                status: 500, #alias :internal_server_error
+                json: {
+                    errors: [
+                        {
+                            type: error.class.to_s,
+                            message: error.message
+                        }
+                    ]
+                } 
+            )
+        end
     end
 
 end

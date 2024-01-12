@@ -28,11 +28,11 @@
 
 .sidebar>.tab.green{
     background-color: #48ab4b40;
-    border-left: .75rem solid rgba(76, 175, 79, 0.75);
+    border-left: .75rem solid #4caf4fbf;
 }
 .sidebar>.tab.hover:hover{
     background-color: #48ab4b40;
-    border-left: .75rem solid rgba(76, 175, 79, 0.75);
+    border-left: .75rem solid #4caf4fbf;
 }
 
 .sidebar>.tab>.icon{
@@ -71,4 +71,52 @@
 
 .arrow.arrow-vertical{
     transform: rotate(90deg);
+}
+
+.animate{
+    transition: width 0.5s ease-in
+}
+.one_time{
+    background-color: #ff5e00;
+}
+
+.daily{
+    background-color: #53A5D3;
+}
+
+.weekly{
+    background-color: #FFC83A;
+}
+
+.monthly{
+    background-color: #FF0000;
+}
+
+.yearly{
+    background-color: #7453D3;
+}
+
+.one_time-mark-done-button:hover{
+    background-color: #ff5e00;
+    color: white;
+}
+
+.daily-mark-done-button:hover{
+    background-color: #53A5D3;
+    color: white;
+}
+
+.weekly-mark-done-button:hover{
+    background-color: #FFC83A;
+    color: white;
+}
+
+.monthly-mark-done-button:hover{
+    background-color: #FF0000;
+    color: white;
+}
+
+.yearly-mark-done-button:hover{
+    background-color: #7453D3;
+    color: white;
 }

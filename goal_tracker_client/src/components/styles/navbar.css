@@ -36,11 +36,6 @@
     position: absolute;
 }
 
-.vl{
-    border-left: .1rem solid var(--border-color);
-    margin: 1rem;
-}
-
 .no-margin{
     margin: 0;
 }
@@ -66,11 +61,6 @@
 .profile-container{
     display: flex;
     align-items: center;
-}
-
-.profile-container>.vl{
-    height: 40%;
-    margin: 1rem;
 }
 
 .right{

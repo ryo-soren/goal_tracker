@@ -11,8 +11,7 @@
 
 .calendar-container{
     display: grid;
-    /* grid-template-columns: 2fr 1fr; */
-    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); /* Alternatively, you can use specific widths like 200px 100px; */
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
     width: 95%;
     height: 100%;
     margin: 0rem auto;
@@ -28,26 +27,6 @@
 .goals-view{
     display: grid;
     grid-template-rows: 1fr 8fr;
-}
-
-.one_time{
-    background-color: #ff5e00;
-}
-
-.daily{
-    background-color: #53A5D3;
-}
-
-.weekly{
-    background-color: #FFC83A;
-}
-
-.monthly{
-    background-color: #FF0000;
-}
-
-.yearly{
-    background-color: #7453D3;
 }
 
 .one_time-text{

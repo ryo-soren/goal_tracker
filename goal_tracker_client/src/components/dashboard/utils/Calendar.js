@@ -13,9 +13,8 @@ const Calendar = (props) => {
     const completions = getCompletions(goals)
 
     return(
-        <div className='calendar-container bg-white rounded-t border-t border-x border-[#B1B1B1] overflow-hidden'>
+        <div className='calendar-container bg-white rounded-t border-t border-x border-[#B1B1B1] overflow-hidden h-full'>
             <div className='calendar-view flex flex-col'>
-                {/* <div className='flex justify-between p-2 items-center text-stone-400'> */}
                 <div className='flex justify-between p-2 items-center text-stone-400 border-r border-[#B1B1B1]'>
                     {/* month & year */}
                     <div>
@@ -73,12 +72,12 @@ const Calendar = (props) => {
                     {dates(selected.month(), selected.year()).map(({date, currentMonth}, index) => {
                         return(
                             // tile container
-                            <div 
+                            <div
                             key={index}
                             className={cn(
                                 // changes text colour for dates outside of the selected month  
                                 currentMonth ? "" : "text-stone-300",
-                                "flex flex-col border-t border-r border-[#B1B1B1] select-none" 
+                                "flex flex-col border-t border-r border-[#B1B1B1] select-none hover:bg-slate-100" 
                             )}
                             onClick={() => {
                                 setSelected(date)

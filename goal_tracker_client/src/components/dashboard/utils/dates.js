@@ -17,13 +17,11 @@ export const datesOfWeek = (startDate = dayjs()) => {
             
         }
     }
-    
-
 
     return datesArray
 }
 
-const matchDeadline = (goal, date) => {
+export const matchDeadline = (goal, date) => {
     const dateObjectWithTime = new Date(goal.deadline)
     const year = dateObjectWithTime.getFullYear();
     const month = dateObjectWithTime.getMonth();
@@ -137,7 +135,7 @@ export const months = [
 	"March",
 	"April",
 	"May",
-	"June",
+    "June",
 	"July",
 	"August",
 	"September",
