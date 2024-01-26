@@ -30,6 +30,7 @@ users = User.all
     frequency = ["daily", "weekly", "monthly"]
     deadline = Faker::Date.between(from: Date.today, to: "2023-12-31")
     time = Faker::Time.between(from: deadline.beginning_of_day, to: deadline.end_of_day)
+
     g = Goal.create(
         user: users.sample,
         title: Faker::Lorem.sentence,
@@ -53,6 +54,8 @@ users = User.all
             )
         end
     end
+    g.done = g.completions.count
+    g.save!
 end
 
 goals = Goal.all

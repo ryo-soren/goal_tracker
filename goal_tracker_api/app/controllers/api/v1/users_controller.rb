@@ -9,9 +9,6 @@ class Api::V1::UsersController < Api::ApplicationController
 
     def create
         user = User.new(user_params)
-        puts "******"
-        puts user_params
-        puts "******"
         user.save!
         session[:user_id] = user.id
         render(

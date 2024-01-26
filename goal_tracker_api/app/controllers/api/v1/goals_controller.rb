@@ -3,9 +3,8 @@ class Api::V1::GoalsController < Api::ApplicationController
     load_and_authorize_resource
 
     def index
-        # Goal.check_and_update_unsuccessful
         render(
-            json: @goals,
+            json: @goals.order(:deadline),
             each_serializer: GoalSerializer
         )
     end
@@ -23,16 +22,19 @@ class Api::V1::GoalsController < Api::ApplicationController
     def update
         
         if params[:completion]
-            completion = Completion.create(goal: @goal, user: current_user)
+            @completion = Completion.create(goal: @goal, user: current_user)
             if @goal.times == params[:done]
-                @goal.successful = @goal.successful + 1
+                @goal.successful += 1
                 @goal.save!
             end
         end
         
         @goal.update(goal_params)
         @goal.save!
-        render(json: @goal)
+        render(json:{
+            goal: @goal,
+            completion: @completion
+        })
     end
 
     def destroy

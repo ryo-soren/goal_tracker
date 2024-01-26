@@ -24,7 +24,7 @@ const NewGoalPage = (props) => {
     }
 
     return(
-        <div className="bg-white h-[90%] w-[95%] flex flex-col rounded-xl mx-auto fixed top-10 z-10">
+        <div className="bg-white h-[90%] w-[95%] flex flex-col py-16 rounded-xl mx-auto fixed z-10">
             <GoalForm
                 title = {title}
                 description = {description}
@@ -38,6 +38,7 @@ const NewGoalPage = (props) => {
                 setFrequency={(event)=>setFrequency(event)}
                 setTimes={(event)=>setTimes(event)}
                 setDeadline={(event)=>setDeadline(event)}
+                setDisplay={()=>setDisplay(false)}
 
                 submitForm={(params) => createNewGoal(params)}
             />

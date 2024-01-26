@@ -5,6 +5,7 @@ import GoalForm from './GoalForm'
 
 const EditGoalPage = () => {
 
+    const [goalID, setGoalID] = useState('')
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [frequency, setFrequency] = useState()
@@ -22,8 +23,9 @@ const EditGoalPage = () => {
 
     const getGoal = () => {
         Goal.show(match.params.id).then((goalData) => {
-            const {title, description, frequency, times, deadline} = goalData
+            const {id, title, description, frequency, times, deadline} = goalData
 
+            setGoalID(id)
             setTitle(title)
             setDescription(description)
             setFrequency(frequency)
@@ -44,26 +46,25 @@ const EditGoalPage = () => {
     }
 
     return(
-        <>
-            <div>
-                <GoalForm
-                    title = {title}
-                    description = {description}
-                    frequency = {frequency}
-                    times = {times}
-                    deadline = {deadline}
-                    errors = {errors}
+        <div className="fixed z-10 w-full h-full left-0 p-16 bg-white">
+            <GoalForm
+                goalID = {goalID}
+                title = {title}
+                description = {description}
+                frequency = {frequency}
+                times = {times}
+                deadline = {deadline}
+                errors = {errors}
 
-                    setTitle={(event)=>setTitle(event)}
-                    setDescription={(event)=>setDescription(event)}
-                    setFrequency={(event)=>setFrequency(event)}
-                    setTimes={(event)=>setTimes(event)}
-                    setDeadline={(event)=>setDeadline(event)}
+                setTitle={(event)=>setTitle(event)}
+                setDescription={(event)=>setDescription(event)}
+                setFrequency={(event)=>setFrequency(event)}
+                setTimes={(event)=>setTimes(event)}
+                setDeadline={(event)=>setDeadline(event)}
 
-                    submitForm={(params) => updateGoal(params)}
-                />
-            </div>
-        </>
+                submitForm={(params) => updateGoal(params)}
+            />
+        </div>
     )
 }
 

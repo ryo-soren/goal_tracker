@@ -330,7 +330,7 @@ const GoalIndexView = props => {
                 />
             ) : ("")
         }
-            <div className="w-full h-max border border-[#B1B1B1] rounded m-5">
+            <div className="h-max border border-[#B1B1B1] bg-white rounded m-5">
                 <div className="flex justify-around rounded-t border-b border-[#B1B1B1] mx-6 sticky z-10 top-0 bg-white">
                     {types.map(({type}) => {
                         const underscoreRemoved = capitalizeFirstLetter(type.replace("_", " "))

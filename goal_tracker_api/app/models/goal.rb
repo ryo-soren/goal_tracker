@@ -3,44 +3,31 @@ class Goal < ApplicationRecord
     belongs_to :user
     has_many :completions, dependent: :destroy
     
-    # after_initialize :check_frequency
 
     validates :title, :description, :deadline, presence: true
     validates :times, numericality: {greater_than: 0, only_integer: true}
 
     def self.check_and_update_unsuccessful
         goals = Goal.all
-        goals.each do |g|
-            if g.deadline.present? && g.deadline <= Date.today.to_s 
-                if g.times > g.done 
-                    g.unsuccessful = g.unsuccessful + 1
-                    frequency = g.frequency
-                    case frequency
-                    when "daily"
-                        # g.deadline = Date.today + 1
-                    when "weekly"
-                        # g.deadline = Date.today + 7
-                    when "monthly"
-                        # g.deadline = Date.today.beginning_of_month.next_month
-                    end
+        goals.find_each do |goal|
+            if goal.deadline.present? && goal.deadline <= Time.current
+                if goal.times > goal.done 
+                    goal.unsuccessful += 1
                 end
-                g.done = 0
+                frequency = goal.frequency
+                case frequency
+                when "daily"
+                    goal.deadline = Time.current + 1.day
+                when "weekly"
+                    goal.deadline = Time.current + 1.week
+                when "monthly"
+                    goal.deadline = Time.current + Time.current.end_of_month.day.days
+                when "yearly"
+                    goal.deadline = Time.current + 1.year
+                end
+                goal.done = 0
             end 
-            g.save!
+            goal.save!
         end
     end
-
-    private
-
-    def check_frequency
-        if frequency&.include?("daily")
-            self.deadline = Date.today + 1
-        elsif frequency&.include?("weekly")
-            self.deadline = Date.today + 7
-        elsif frequency&.include?("monthly")
-            self.deadline = Date.today.beginning_of_month.next_month
-        end
-    end
-
-    
 end
